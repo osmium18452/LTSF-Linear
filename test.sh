@@ -1,5 +1,5 @@
 model_name=Autoformer
-pred_len=96
+pred_len=100
 python -u run_longExp.py \
 --is_training 1 \
 --root_path ./dataset/ \

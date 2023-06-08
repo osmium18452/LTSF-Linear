@@ -124,8 +124,8 @@ class Exp_Main(Exp_Basic):
             self.model.train()
             epoch_time = time.time()
             for i, (batch_x, batch_y, batch_x_mark, batch_y_mark) in enumerate(train_loader):
-                print(batch_x.shape,batch_y.shape,batch_x_mark.shape,batch_y_mark.shape)
-                exit()
+                # print(batch_x.shape,batch_y.shape,batch_x_mark.shape,batch_y_mark.shape)
+                # exit()
                 iter_count += 1
                 model_optim.zero_grad()
                 batch_x = batch_x.float().to(self.device)
@@ -162,6 +162,8 @@ class Exp_Main(Exp_Basic):
                             outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)[0]
                             
                         else:
+                            print(batch_x.shape,batch_x_mark.shape,dec_inp.shape,batch_y_mark.shape,batch_y.shape)
+                            exit()
                             outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark, batch_y)
                     # print(outputs.shape,batch_y.shape)
                     f_dim = -1 if self.args.features == 'MS' else 0
