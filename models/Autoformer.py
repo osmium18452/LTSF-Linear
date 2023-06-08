@@ -15,6 +15,7 @@ class Model(nn.Module):
     """
     def __init__(self, configs):
         super(Model, self).__init__()
+        print(configs)
         self.seq_len = configs.seq_len
         self.label_len = configs.label_len
         self.pred_len = configs.pred_len
