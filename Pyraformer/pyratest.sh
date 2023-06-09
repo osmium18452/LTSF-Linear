@@ -1,0 +1,1 @@
+python long_range_main.py  -data_path weather.csv -data weather -input_size 96 -predict_step 96 -n_head 6 -lr 0.00001 -d_model 256

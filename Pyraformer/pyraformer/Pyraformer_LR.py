@@ -44,15 +44,21 @@ class Encoder(nn.Module):
             # self.enc_embedding = CustomEmbedding(opt.enc_in, opt.d_model, opt.covariate_size, opt.seq_num, opt.dropout)
         else:
             self.enc_embedding = DataEmbedding(opt.enc_in, opt.d_model, opt.dropout)
-
+        # print('opt.cscm',opt.CSCM)
+        # print(opt.d_model,opt.window_size,opt.d_bottleneck)
+        # exit()
         self.conv_layers = eval(opt.CSCM)(opt.d_model, opt.window_size, opt.d_bottleneck)
 
     def forward(self, x_enc, x_mark_enc):
-
+        # print(x_enc.shape,x_mark_enc.shape)
+        # exit()
         seq_enc = self.enc_embedding(x_enc, x_mark_enc)
 
         mask = self.mask.repeat(len(seq_enc), 1, 1).to(x_enc.device)
+        # print('......',seq_enc.shape)
         seq_enc = self.conv_layers(seq_enc)
+        # print('......',seq_enc.shape)
+        # exit()
 
         for i in range(len(self.layers)):
             seq_enc, _ = self.layers[i](seq_enc, mask)
@@ -73,6 +79,8 @@ class Model(nn.Module):
 
     def __init__(self, opt):
         super().__init__()
+        # print(vars(opt))
+        # exit()
 
         self.predict_step = opt.predict_step
         self.d_model = opt.d_model
